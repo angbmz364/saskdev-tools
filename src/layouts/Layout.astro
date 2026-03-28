@@ -1,23 +1,36 @@
+---
+
+import Header from "../sections/Hero.astro";
+import Footer from "../sections/Footer.astro"
+
+const { title, description } = Astro.props;
+
+---
+
+
+
 <!doctype html>
-<html lang="en">
+<html lang="es">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
+		<meta name="author" content="SaskDev">
+		<meta name="keywords" content="saskdev, minecraft servers tools">
+		<meta name="description" content=`${description}`>
+		<title>{title}</title>
 	</head>
 	<body>
+		<Header />
 		<slot />
+		<Footer />
 	</body>
 </html>
 
 <style>
-	html,
+	@import "tailwindcss";
+
 	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
+		background: #0d0d0d;
+		color: #fff;
 	}
 </style>
