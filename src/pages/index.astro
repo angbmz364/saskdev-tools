@@ -1,12 +1,76 @@
---- 
-import Layout from '../layouts/Layout.astro';
-import Hero from '../sections/Hero.astro';
-
+---
+import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout
-    title="SaskDev - Frontend Web Developer"
-    description="Mi portafolio personal con herramientas para Minecraft: Convertor de menus, y constructor de eventos de ConditionalEvents & Skript, con un sistema drag and drop."
- >
-	<Hero />
+  title="SaskDev - Desarrollador Web Frontend"
+  description="Mi portafolio personal con herramientas para Minecraft: Convertor de menus, y constructor de eventos de ConditionalEvents & Skript, con un sistema drag and drop."
+>
+  <main>
+    <section
+      class="flex flex-col sm:flex-row items-center justify-center sm:justify-between h-screen max-w-280 w-[90dvw]"
+    >
+      <div>
+        <h1 class="text-4xl w-2xs sm:w-sm py-3 font-bold">Hey, soy saskdev</h1>
+        <p class="w-2xs md:w-lg text-xl py-3">
+          +5 años programando. Estudiante de <span
+            class="text-blue-500 font-semibold"
+            >Ingenieria de Software y Analista de Datos</span
+          > de La Merced, Perú. Especializado en el desarrollo de aplicaciones web
+          únicas.
+        </p>
+        <div class="py-3 text-sm md:text-md w-2xs flex items-center justify-between">
+          <a
+            href="#"
+            class="flex gap-2 items-center justify-center px-5 py-1 rounded-3xl border border-gray-500 bg-gray-800/80 transition-all duration-150
+            hover:bg-gray-100 hover:text-gray-950"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="size-5"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"
+              ></path>
+            </svg>
+            Contáctame</a
+          >
+          <a
+            href="#"
+            class="flex gap-2 items-center justify-center px-5 py-1 rounded-3xl border border-gray-500 bg-gray-800/80 transition-all duration-150
+            hover:bg-gray-100 hover:text-gray-950
+            "
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="size-5"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5"
+              ></path>
+            </svg>
+
+            GitHub</a
+          >
+        </div>
+      </div>
+      <img
+        src="/src/assets/logo-white.svg"
+        alt="Foto de perfil de SaskDev"
+        class="size-50 lg:size-80 bg-gray-950/80 rounded-full p-5 hidden sm:block"
+      />
+    </section>
+  </main>
 </Layout>
