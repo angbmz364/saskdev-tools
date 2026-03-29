@@ -1,36 +1,45 @@
 ---
+import "@fontsource-variable/onest/wght.css";
 
-import Header from "../sections/Hero.astro";
-import Footer from "../sections/Footer.astro"
+import Header from "../sections/Header.astro";
+import Footer from "../sections/Footer.astro";
 
 const { title, description } = Astro.props;
-
 ---
-
-
 
 <!doctype html>
 <html lang="es">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="author" content="SaskDev">
-		<meta name="keywords" content="saskdev, minecraft servers tools">
-		<meta name="description" content=`${description}`>
-		<title>{title}</title>
-	</head>
-	<body>
-		<Header />
-		<slot />
-		<Footer />
-	</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="author" content="SaskDev" />
+    <meta name="keywords" content="saskdev, minecraft servers tools" />
+    <meta name="description" content=`${description}` />
+    <link
+      rel="favicon icon"
+      href="/src/assets/logo-white.svg"
+      type="image/svg"
+    />
+    <title>{title}</title>
+  </head>
+  <body class="bg-neutral-950">
+	  <div class="absolute top-0 z-[-2] h-screen w-screen bg-neutral-950 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))]"></div>
+    <Header />
+    <slot />
+    <Footer />
+  </body>
 </html>
 
 <style is:global>
-	@import "tailwindcss";
+  @import "tailwindcss";
 
-	body {
-		background: #0d0d0d;
-		color: #fff;
-	}
+  body {
+    color: #fff;
+    display: flex;
+    overflow: hidden;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: "Onest Variable", sans-serif;
+  }
 </style>
