@@ -1,5 +1,10 @@
+---
+const extraClasses = Astro.props
+---
+
+
 <section
-      class="flex flex-col sm:flex-row items-center justify-center sm:justify-between h-[80dvh] max-w-240 w-[90dvw]"
+      class=`flex flex-col sm:flex-row items-center justify-center sm:justify-between ${extraClasses} max-w-240 w-[90dvw]`
     >
     <slot />
 </section>
