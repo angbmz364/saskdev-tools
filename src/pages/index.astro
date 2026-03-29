@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import Section from "../components/Section.astro"
 ---
 
 <Layout
@@ -7,9 +8,8 @@ import Layout from "../layouts/Layout.astro";
   description="Mi portafolio personal con herramientas para Minecraft: Convertor de menus, y constructor de eventos de ConditionalEvents & Skript, con un sistema drag and drop."
 >
   <main>
-    <section
-      class="flex flex-col sm:flex-row items-center justify-center sm:justify-between h-[80dvh] max-w-240 w-[90dvw]"
-    >
+    <!-- Hero -->
+    <Section>
       <div>
         <h1 class="text-4xl md:text-5xl w-2xs md:w-lg py-3 font-bold">Hey, soy saskdev</h1>
         <p class="w-2xs md:w-lg text-xl py-3">
@@ -71,7 +71,11 @@ import Layout from "../layouts/Layout.astro";
         alt="Foto de perfil de SaskDev"
         class="size-50 lg:size-65 bg-gray-950/80 rounded-full p-5 hidden sm:block"
       />
-    </section>
-    
+    </Section>
+
+    <!-- Experience  -->
+    <Section>
+        
+    </Section>
   </main>
 </Layout>
