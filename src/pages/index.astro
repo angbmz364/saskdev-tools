@@ -1,5 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import Section from "../components/Section.astro";
+import Experience from "../sections/Experience.astro";
 ---
 
 <Layout
@@ -7,11 +9,10 @@ import Layout from "../layouts/Layout.astro";
   description="Mi portafolio personal con herramientas para Minecraft: Convertor de menus, y constructor de eventos de ConditionalEvents & Skript, con un sistema drag and drop."
 >
   <main>
-    <section
-      class="flex flex-col sm:flex-row items-center justify-center sm:justify-between h-screen max-w-280 w-[90dvw]"
-    >
+    <!-- Hero -->
+    <Section>
       <div>
-        <h1 class="text-4xl w-2xs sm:w-sm py-3 font-bold">Hey, soy saskdev</h1>
+        <h1 class="text-4xl md:text-5xl w-2xs md:w-lg py-3 font-bold">Hey, soy saskdev</h1>
         <p class="w-2xs md:w-lg text-xl py-3">
           +5 años programando. Estudiante de <span
             class="text-blue-500 font-semibold"
@@ -69,8 +70,13 @@ import Layout from "../layouts/Layout.astro";
       <img
         src="/src/assets/logo-white.svg"
         alt="Foto de perfil de SaskDev"
-        class="size-50 lg:size-80 bg-gray-950/80 rounded-full p-5 hidden sm:block"
+        class="size-50 lg:size-65 bg-gray-950/80 rounded-full p-5 hidden sm:block"
       />
-    </section>
+    </Section>
+
+    <!-- Experience  -->
+    <Section extraClasses="h-[80dvh]">
+        <Experience />
+    </Section>
   </main>
 </Layout>
