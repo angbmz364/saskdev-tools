@@ -25,16 +25,16 @@ const experience = [
   </svg>
   Experiencia laboral
 </h2>
-<ol class="py-3">
+<ol class="flex items-center flex-col justify-center sm:justify-start w-full">
   
     {
       experience.map( ({title, date, content}) => (
-        <li>
-          <div class="flex my-3 flex-col items-start justify-between sm:items-center sm:flex-row">
+        <li class="max-w-xs sm:max-w-full">
+          <div class="my-3 flex flex-col sm:flex-row items-start justify-between">
             <h3 class="text-2xl font-mono text-blue-500 font-semibold">{title}</h3>
             <time class="text-gray-300">{date}</time>
           </div>
-          <p class="text-gray-300 w-full">
+          <p class="text-gray-300 pb-3">
             {content}
           </p>
         </li>
