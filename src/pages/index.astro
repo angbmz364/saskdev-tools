@@ -2,18 +2,19 @@
 import Layout from "../layouts/Layout.astro";
 import Section from "../components/Section.astro";
 import Experience from "../sections/Experience.astro";
+import Aboutme from "../sections/Aboutme.astro";
 ---
 
 <Layout
   title="SaskDev - Desarrollador Web Frontend"
   description="Mi portafolio personal con herramientas para Minecraft: Convertor de menus, y constructor de eventos de ConditionalEvents & Skript, con un sistema drag and drop."
 >
-  <main>
+  <main class="flex items-center flex-col">
     <!-- Hero -->
-    <Section extraClasses="h-[80dvh]">
+    <Section extraClasses="h-[90dvh]">
       <div>
         <h1 class="text-4xl md:text-5xl w-2xs md:w-lg py-3 font-bold">Hey, soy saskdev</h1>
-        <p class="w-2xs md:w-lg text-xl py-3">
+        <p class="w-2xs md:w-lg text-xl py-3 text-gray-200">
           +5 años programando. Estudiante de <span
             class="text-blue-500 font-semibold"
             >Ingenieria de Software y Analista de Datos</span
@@ -71,13 +72,22 @@ import Experience from "../sections/Experience.astro";
       <img
         src="/logo-white.svg"
         alt="Foto de perfil de SaskDev"
-        class="size-50 lg:size-65 bg-gray-950/80 rounded-full p-5 hidden sm:block"
+        class="size-50 lg:size-65 bg-gray-950/80 rounded-full p-5 hidden sm:block hover:-translate-y-2 hover:drop-shadow-xl transition-all duration-500"
       />
     </Section>
 
+    <!-- About Me -->
+    <section class="
+    flex flex-col items-center sm:items-start max-w-240 w-[90dvw]
+    my-8"
+    >
+      <Aboutme />
+    </section> 
     <!-- Experience  -->
-    <Section>
-        <Experience />
-    </Section>
+    <section class="
+    flex flex-col items-center sm:items-start max-w-240 w-[90dvw] mt-20"
+    >
+      <Experience />
+    </section>
   </main>
 </Layout>
