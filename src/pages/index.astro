@@ -3,6 +3,7 @@ import Layout from "../layouts/Layout.astro";
 import Section from "../components/Section.astro";
 import Experience from "../sections/Experience.astro";
 import Aboutme from "../sections/Aboutme.astro";
+import Contact from "../sections/Contact.astro";
 ---
 
 <Layout
@@ -23,7 +24,7 @@ import Aboutme from "../sections/Aboutme.astro";
         </p>
         <div class="py-3 text-sm md:text-md w-2xs flex items-center justify-between">
           <a
-            href="mailto:angel@diofstudios.com"
+            href="#contact"
             class="flex gap-2 items-center justify-center px-5 py-1 rounded-3xl border border-gray-500 bg-gray-800/80 transition-all duration-150
             hover:bg-gray-100 hover:text-gray-950"
           >
@@ -80,6 +81,7 @@ import Aboutme from "../sections/Aboutme.astro";
     <section class="
     flex flex-col items-center sm:items-start max-w-240 w-[90dvw]
     my-8"
+    id="about"
     >
       <Aboutme />
     </section> 
@@ -88,6 +90,12 @@ import Aboutme from "../sections/Aboutme.astro";
     flex flex-col items-center sm:items-start max-w-240 w-[90dvw] mt-20"
     >
       <Experience />
+    </section>
+    <section class="
+    flex flex-col items-center sm:items-start max-w-240 w-[90dvw] mt-20"
+    id="contact"
+    >
+      <Contact />
     </section>
   </main>
 </Layout>
