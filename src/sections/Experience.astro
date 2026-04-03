@@ -3,17 +3,16 @@ const experience = [
   {
     title: "Desarrollador Fullstack en DiofStudios",
     date: "Enero 2026 - Actualmente",
-    content: "Fui encargado del desarrollo y deploy de la página web oficial de la empresa de desarrollo web Diof Studios. A su vez soy parte del equipo de desarrollo.",
-  },
-  {
-    title: "Principal Backend Engineer en Google",
-    date: "Enero 2025 - Junio 2025",
-    content: "Fui encargado del desarrollo y deploy de la página web oficial de la empresa de desarrollo web Diof Studios. A su vez soy parte del equipo de desarrollo.",
+    url: "https://diofstudios.com",
+    content:
+      "Fui encargado del desarrollo y deploy de la página web oficial de la empresa de desarrollo web Diof Studios. A su vez soy parte del equipo de desarrollo.",
   }
 ];
 ---
 
-<h2 class="text-3xl flex items-center justify-center sm:justify-start gap-3 w-full font-semibold">
+<h2
+  class="text-3xl flex items-center justify-center sm:justify-start gap-3 w-full font-semibold"
+>
   <svg
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
@@ -30,20 +29,47 @@ const experience = [
   </svg>
   Experiencia laboral
 </h2>
-<ol class="flex items-center flex-col justify-center sm:justify-start w-full mt-8">
-  
-    {
-      experience.map( ({title, date, content}) => (
-        <li class="max-w-xs sm:max-w-full">
-          <div class="my-3 flex flex-col sm:flex-row items-start justify-between">
-            <h3 class="text-2xl font-mono text-blue-500 font-semibold">{title}</h3>
-            <time class="text-gray-300">{date}</time>
-          </div>
-          <p class="text-gray-300 pb-3">
-            {content}
-          </p>
-        </li>
-      ) 
-    )
-    } 
+<ol
+  class="flex items-center flex-col justify-center sm:justify-start w-full mt-8"
+>
+  {
+    experience.map(({ title, date, content, url }) => (
+      <li class="max-w-xs sm:max-w-full">
+        <div class="my-3 flex flex-col sm:flex-row items-start sm:items-center justify-between">
+          <h3 class="text-3xl text-gray-100 font-semibold">{title}</h3>
+          <time
+            class="
+            text-sm rounded-full border text-blue-500 px-3 text-center mt-3 sm:mt-0
+            "
+          >
+            {date}
+          </time>
+        </div>
+        <p class="text-gray-200 text-md pb-3">{content}</p>
+        <a
+          href={url}
+          target="_blank"
+          class="
+          flex sm:inline-flex gap-3 items-center justify-center px-5 py-1 rounded-3xl border border-gray-500 bg-gray-800/80 transition-all duration-150 text-sm mb-4
+          "
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1"
+            stroke="currentColor"
+            class="size-5"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"
+            />
+          </svg>
+          Ver
+        </a>
+      </li>
+    ))
+  }
 </ol>
