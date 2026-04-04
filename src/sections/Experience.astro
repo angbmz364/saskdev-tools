@@ -2,11 +2,11 @@
 const experience = [
   {
     title: "Desarrollador Fullstack en DiofStudios",
-    date: "Enero 2026 - Actualmente",
+    date: "1 Enero, 2026 - Hasta la fecha",
     url: "https://diofstudios.com",
     content:
       "Fui encargado del desarrollo y deploy de la página web oficial de la empresa de desarrollo web Diof Studios. A su vez soy parte del equipo de desarrollo.",
-  }
+  },
 ];
 ---
 
@@ -34,33 +34,34 @@ const experience = [
 >
   {
     experience.map(({ title, date, content, url }) => (
-      <li class="max-w-xs sm:max-w-full">
-        <div class="my-3 flex flex-col sm:flex-row items-start sm:items-center justify-between">
-          <h3 class="text-2xl text-gray-100 font-semibold">{title}</h3>
+      <li class="max-w-xs sm:max-w-full mb-4">
+        <div class="mt-3 flex flex-col items-start justify-start">
           <time
             class="
-            text-sm rounded-full border text-blue-500 px-3 text-center mt-3 sm:mt-0
+            text-sm uppercase font-semibold text-blue-500 mb-2
             "
           >
             {date}
           </time>
+          <h3 class="text-2xl text-gray-100 font-semibold">{title}</h3>
         </div>
-        <p class="text-gray-200 text-md pb-3">{content}</p>
+        <p class="text-gray-200 text-md pb-3 mt-1">{content}</p>
         <a
           href={url}
           target="_blank"
           class="
-          flex sm:inline-flex gap-3 items-center justify-center px-5 py-1 rounded-3xl border border-gray-500 bg-gray-800/80 transition-all duration-150
-            hover:bg-gray-100 hover:text-gray-950 text-sm md:text-md
+          inline-flex gap-3 items-center justify-center rounded-3xl transition-all duration-150 text-blue-500 uppercase font-semibold text-sm md:text-md
+          hover:translate-x-1
           "
         >
+          Ver página
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
-            stroke-width="1"
+            stroke-width="2"
             stroke="currentColor"
-            class="size-5"
+            class="size-4"
           >
             <path
               stroke-linecap="round"
@@ -68,7 +69,6 @@ const experience = [
               d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"
             />
           </svg>
-          Ver
         </a>
       </li>
     ))
