@@ -1,0 +1,43 @@
+---
+export interface Props {
+  title: string;
+  description: string;
+  url: string;
+  tags?: string[];
+}
+
+const { title, description, url, tags } = Astro.props;
+---
+
+<a
+  href={url}
+  class="relative block p-6 h-full bg-neutral-900/40 border border-gray-800/80 backdrop-blur-sm rounded-2xl transition-all duration-300 hover:-translate-y-1.5 hover:bg-neutral-900/80 hover:border-neutral-500/40 hover:shadow-xl hover:shadow-neutral-900/10 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950"
+  aria-label={`Ir a la herramienta ${title}`}
+>
+  <div class="flex flex-col h-full">
+    <div class="flex items-center gap-4 mb-4">
+      <div
+        class="flex items-center justify-center p-3 w-12 h-12 bg-gray-800/80 text-gray-400 rounded-xl group-hover:bg-blue-500 group-hover:text-white transition-colors duration-300 border border-gray-700/80 group-hover:border-blue-400"
+      >
+        <slot />
+      </div>
+      <h3 class="text-xl font-bold text-gray-100">{title}</h3>
+    </div>
+
+    <p class="text-gray-400 text-sm leading-relaxed mb-6 grow">
+      {description}
+    </p>
+
+    {
+      tags && tags.length > 0 && (
+        <div class="flex flex-wrap gap-2 mt-auto">
+          {tags.map((tag) => (
+            <span class="px-3 py-1 bg-neutral-900/80 text-xs font-medium text-gray-400 rounded-full border border-gray-800/80">
+              {tag}
+            </span>
+          ))}
+        </div>
+      )
+    }
+  </div>
+</a>

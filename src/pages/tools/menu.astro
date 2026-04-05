@@ -1,0 +1,351 @@
+---
+import Layout from "../../layouts/ToolLayout.astro";
+---
+
+<Layout
+  title="Menu Converter | SaskDev"
+  description="Convierte rápida y fielmente tus configuraciones de zMenu a DeluxeMenus y viceversa manteniendo ítems, acciones y parámetros esenciales."
+>
+  <main class="w-full max-w-6xl mx-auto px-4 py-16 gap-10 flex flex-col items-center">
+    
+    <div class="text-center max-w-3xl mt-10 mb-2">
+      <h1 class="text-4xl md:text-5xl font-bold mb-6 text-gray-100 flex items-center justify-center gap-4">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="size-10 text-blue-500">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 21 3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" />
+        </svg>
+        Menu <span class="text-blue-500">Converter</span>
+      </h1>
+      <p class="text-lg text-gray-300">
+        Pega el código YAML de tu menú, selecciona el formato de origen y conviértelo al instante. Mantenemos slots, ítems (incluyendo base64) y comandos.
+      </p>
+    </div>
+
+    <!-- Interface Component -->
+    <div class="w-full bg-gray-900/60 border border-gray-800 backdrop-blur-md rounded-3xl p-6 shadow-2xl flex flex-col gap-6 -mt-2">
+        <!-- Controles -->
+        <div class="flex flex-col md:flex-row items-center justify-between gap-4 w-full bg-gray-950/60 p-4 rounded-2xl border border-gray-800/80">
+            <div class="flex items-center gap-3 w-full md:w-auto">
+                <label for="conversionDirection" class="text-gray-300 font-medium whitespace-nowrap">Modo de Conversión:</label>
+                <div class="relative w-full md:w-auto">
+                    <select id="conversionDirection" class="w-full md:w-auto appearance-none bg-gray-900 text-gray-100 px-4 py-2 pr-10 rounded-xl border border-gray-700 outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all font-medium cursor-pointer">
+                        <option value="dm2zm">DeluxeMenus a zMenu</option>
+                        <option value="zm2dm">zMenu a DeluxeMenus</option>
+                    </select>
+                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-gray-400">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </div>
+                </div>
+            </div>
+
+            <button id="convertBtn" class="w-full md:w-auto flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-500 text-white px-8 py-2.5 rounded-xl transition-all duration-300 transform active:scale-95 shadow-lg shadow-blue-900/20 font-semibold focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="size-5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99" />
+                </svg>
+                Convertir YAML
+            </button>
+        </div>
+
+        <!-- Alertas -->
+        <div id="alertBox" class="hidden w-full p-4 rounded-xl text-sm font-medium items-center gap-2 transition-all duration-300"></div>
+
+        <!-- Editores -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 h-[65vh] min-h-[450px]">
+            <!-- Entrada -->
+            <div class="flex flex-col h-full rounded-2xl border border-gray-800 overflow-hidden relative group bg-gray-950/80 focus-within:border-blue-500/50 focus-within:ring-1 focus-within:ring-blue-500/30 transition-all">
+                <div class="bg-gray-800/60 px-4 py-3 border-b border-gray-700/80 flex justify-between items-center backdrop-blur-sm">
+                    <span id="sourceLabel" class="font-semibold text-gray-200">DeluxeMenus (Entrada)</span>
+                </div>
+                <textarea id="sourceEditor" class="w-full h-full bg-transparent text-gray-300 p-4 font-mono text-sm resize-none outline-none custom-scrollbar leading-relaxed" placeholder="Pega tu configuración YAML aquí..." spellcheck="false" aria-label="Editor de código de entrada"></textarea>
+            </div>
+
+            <!-- Salida -->
+            <div class="flex flex-col h-full rounded-2xl border border-gray-800 overflow-hidden relative group bg-gray-950/50">
+                <div class="bg-gray-800/40 px-4 py-3 border-b border-gray-800 flex justify-between items-center backdrop-blur-sm">
+                    <span id="resultLabel" class="font-semibold text-blue-400">zMenu (Salida)</span>
+                    <button id="copyBtn" class="text-gray-400 hover:text-white transition-transform active:scale-90" aria-label="Copiar al portapapeles" title="Copiar al portapapeles">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 0 1-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 0 1 1.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 0 0-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 0 1-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 0 0-3.375-3.375h-1.5a1.125 1.125 0 0 1-1.125-1.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H9.75" />
+                        </svg>
+                    </button>
+                </div>
+                <textarea id="resultEditor" class="w-full h-full bg-transparent p-4 text-blue-300 font-mono text-sm resize-none outline-none custom-scrollbar leading-relaxed" readonly placeholder="Aquí aparecerá el código convertido..." aria-label="Editor de código de salida (solo lectura)"></textarea>
+            </div>
+        </div>
+    </div>
+  </main>
+</Layout>
+
+<style is:global>
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background-color: #374151;
+    border-radius: 6px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background-color: #4b5563;
+  }
+</style>
+
+<!-- JS-YAML CDN (Librería Vanilla para parsing de YAML) -->
+<script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
+
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', () => {
+    const $ = id => document.getElementById(id);
+    const sourceEditor = $('sourceEditor');
+    const resultEditor = $('resultEditor');
+    const convertBtn = $('convertBtn');
+    const copyBtn = $('copyBtn');
+    const conversionDirection = $('conversionDirection');
+    const sourceLabel = $('sourceLabel');
+    const resultLabel = $('resultLabel');
+    const alertBox = $('alertBox');
+
+    // Cambiar texto según la dirección seleccionada
+    conversionDirection.addEventListener('change', () => {
+        if (conversionDirection.value === 'dm2zm') {
+            sourceLabel.textContent = 'DeluxeMenus (Entrada)';
+            resultLabel.textContent = 'zMenu (Salida)';
+        } else {
+            sourceLabel.textContent = 'zMenu (Entrada)';
+            resultLabel.textContent = 'DeluxeMenus (Salida)';
+        }
+        sourceEditor.value = '';
+        resultEditor.value = '';
+        hideAlert();
+    });
+
+    // Función universal de alertas
+    const showAlert = (message, isError = true) => {
+        alertBox.innerHTML = `
+            <div class="flex items-start gap-3">
+                ${isError 
+                    ? '<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>'
+                    : '<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>'
+                }
+                <span>${message.replace(/\n/g, '<br>')}</span>
+            </div>
+        `;
+        alertBox.className = 'w-full p-4 rounded-xl text-sm font-medium items-center gap-2 transition-all duration-300 flex';
+        if (isError) {
+            alertBox.classList.add('bg-red-950/40', 'text-red-400', 'border', 'border-red-900/50');
+        } else {
+            alertBox.classList.add('bg-green-950/40', 'text-green-400', 'border', 'border-green-900/50');
+        }
+    };
+
+    const hideAlert = () => {
+        alertBox.classList.add('hidden');
+        alertBox.classList.remove('flex');
+    };
+
+    // Parsea comandos de DeluxeMenus a la sintaxis del motor de zMenu
+    function parseActionsToZm(commands) {
+        if (!commands) return [];
+        let actions = [];
+        let list = Array.isArray(commands) ? commands : [commands];
+        list.forEach(c => {
+            let cmd = String(c).trim();
+            if (cmd.startsWith('[console]')) {
+                actions.push('console: ' + cmd.substring(9).trim());
+            } else if (cmd.startsWith('[player]')) {
+                actions.push('player: ' + cmd.substring(8).trim());
+            } else if (cmd.startsWith('[message]')) {
+                actions.push('message: ' + cmd.substring(9).trim());
+            } else if (cmd.startsWith('[close]')) {
+                actions.push('close');
+            } else if (cmd.startsWith('[openguimenu]')) {
+                actions.push('open-menu: ' + cmd.substring(13).trim());
+            } else {
+                actions.push('console: ' + cmd);
+            }
+        });
+        return actions;
+    }
+
+    // Parsea comandos de zMenu a la sintaxis del motor de DeluxeMenus
+    function parseActionsToDm(actions) {
+        if (!actions) return [];
+        let cmds = [];
+        let list = Array.isArray(actions) ? actions : [actions];
+        list.forEach(a => {
+            let act = String(a).trim();
+            if (act.startsWith('console:')) {
+                cmds.push('[console] ' + act.substring(8).trim());
+            } else if (act.startsWith('player:')) {
+                cmds.push('[player] ' + act.substring(7).trim());
+            } else if (act.startsWith('message:')) {
+                cmds.push('[message] ' + act.substring(8).trim());
+            } else if (act === 'close') {
+                cmds.push('[close]');
+            } else if (act.startsWith('open-menu:')) {
+                cmds.push('[openguimenu] ' + act.substring(10).trim());
+            } else {
+                cmds.push('[console] ' + act);
+            }
+        });
+        return cmds;
+    }
+
+    const convertDMtoZM = (dx) => {
+        let zm = {
+            name: dx.menu_title || 'Menu Convertido',
+            size: dx.size || 54,
+            items: {}
+        };
+        // Soporte de tipos de inventario
+        if (dx.inventory_type) zm.type = dx.inventory_type;
+
+        if (dx.items) {
+            for (const [key, item] of Object.entries(dx.items)) {
+                let zItem = { item: {} };
+                
+                // Conversión de materiales y texturas base64 de cabezas
+                if (item.material) {
+                    if (item.material.startsWith('basehead-')) {
+                        zItem.item.material = 'PLAYER_HEAD';
+                        zItem.item.skull = item.material.split('-')[1];
+                    } else if (item.material.startsWith('head-')) {
+                        zItem.item.material = 'PLAYER_HEAD';
+                        zItem.item.skull = item.material.split('-')[1];
+                    } else {
+                        zItem.item.material = item.material;
+                    }
+                } else {
+                    zItem.item.material = 'STONE';
+                }
+
+                if (item.data !== undefined) zItem.item.data = item.data;
+                if (item.amount !== undefined) zItem.item.amount = item.amount;
+                
+                // Slots
+                if (item.slot !== undefined) zItem.slot = item.slot;
+                if (item.slots) zItem.slots = item.slots;
+
+                // Estructura visual
+                if (item.display_name) zItem.name = item.display_name;
+                if (item.lore) zItem.lore = item.lore;
+
+                // Acciones y eventos click
+                let allActions = [];
+                if (item.left_click_commands) {
+                    allActions.push(...parseActionsToZm(item.left_click_commands));
+                }
+                if (item.right_click_commands) {
+                    allActions.push(...parseActionsToZm(item.right_click_commands));
+                }
+                
+                if (allActions.length > 0) {
+                    // Evitar duplicar acciones redundantes que suelen ponerse en DeluxeMenus para ambos clicks
+                    zItem.action = [...new Set(allActions)];
+                }
+
+                zm.items[key] = zItem;
+            }
+        }
+        return zm;
+    };
+
+    const convertZMtoDM = (zm) => {
+        let dx = {
+            menu_title: zm.name || 'Menu Convertido',
+            open_command: 'menu',
+            size: zm.size || 54,
+            items: {}
+        };
+        if (zm.type) dx.inventory_type = zm.type;
+
+        if (zm.items) {
+            for (const [key, val] of Object.entries(zm.items)) {
+                let dItem = {};
+                
+                if (val.item) {
+                    if (val.item.skull) {
+                        dItem.material = 'basehead-' + val.item.skull;
+                    } else {
+                        dItem.material = val.item.material || 'STONE';
+                    }
+                    if (val.item.amount) dItem.amount = val.item.amount;
+                    if (val.item.data) dItem.data = val.item.data;
+                } else {
+                    dItem.material = 'STONE';
+                }
+
+                if (val.slot !== undefined) dItem.slot = val.slot;
+                if (val.slots) dItem.slots = val.slots;
+
+                if (val.name) dItem.display_name = val.name;
+                if (val.lore) dItem.lore = val.lore;
+
+                if (val.action) {
+                    let dmCommands = parseActionsToDm(val.action);
+                    dItem.left_click_commands = dmCommands;
+                    dItem.right_click_commands = dmCommands;
+                }
+
+                dx.items[key] = dItem;
+            }
+        }
+        return dx;
+    };
+
+    convertBtn.addEventListener('click', () => {
+        hideAlert();
+        let sourceCode = sourceEditor.value.trim();
+        
+        if (!sourceCode) {
+            showAlert('Por favor, pega el código YAML de origen para poder realizar la conversión.');
+            return;
+        }
+
+        try {
+            // Utilizamos js-yaml para parsear el código pegado en un objeto JS
+            const parsedObj = jsyaml.load(sourceCode);
+            
+            if (typeof parsedObj !== 'object' || parsedObj === null) {
+                showAlert('El YAML ingresado no es válido y no produce una estructura adecuada de configuración.');
+                return;
+            }
+
+            let resultObj;
+            if (conversionDirection.value === 'dm2zm') {
+                resultObj = convertDMtoZM(parsedObj);
+            } else {
+                resultObj = convertZMtoDM(parsedObj);
+            }
+
+            // Convertimos el objeto JS procesado devuelta a una cadena YAML validada
+            const yamlStr = jsyaml.dump(resultObj, { 
+                indent: 2, 
+                lineWidth: -1,
+                quotingType: '"',    // Preferimos formato compatible con Spigot/Bukkit
+                forceQuotes: true    // Evita errores donde un código de color en YAML se estropee o rompa el string
+            });
+
+            resultEditor.value = yamlStr;
+            showAlert('Conversión generada exitosamente. Verifica el resultado en la salida debajo.', false);
+            
+        } catch (e) {
+            console.error(e);
+            showAlert(`Mala sintaxis detectada. No pudimos leer el archivo YAML:\\n${e.message}`);
+        }
+    });
+
+    copyBtn.addEventListener('click', () => {
+        if (!resultEditor.value) return;
+        navigator.clipboard.writeText(resultEditor.value).then(() => {
+            const originalHTML = copyBtn.innerHTML;
+            copyBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 text-green-400"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" /></svg>`;
+            setTimeout(() => {
+                copyBtn.innerHTML = originalHTML;
+            }, 2000);
+        });
+    });
+  });
+</script>
