@@ -1,9 +1,11 @@
 ---
-import Layout from "../layouts/Layout.astro";
+import Layout from "../layouts/ToolLayout.astro";
+import ConverterUI from "../components/ConverterUI.astro"
 ---
 
-<Layout>
-    <main>
-        <h1>Hello world</h1>
-    </main>
+<Layout
+  title="SaskDev - Desarrollador Web Frontend"
+  description="Mi portafolio personal con herramientas para Minecraft: Convertor de menus, y constructor de eventos de ConditionalEvents & Skript, con un sistema drag and drop."
+>
+    <ConverterUI />
 </Layout>
