@@ -1,10 +1,15 @@
 ---
-const {extraClasses} = Astro.props
+export interface Props {
+  classes?: string;
+}
+
+
+const { classes } = Astro.props
 ---
 
 
 <section
-      class=`flex flex-col sm:flex-row items-center justify-center sm:justify-between ${extraClasses} max-w-240 w-[90dvw]`
+  class=`flex flex-col sm:flex-row items-center justify-center sm:justify-between ${classes} max-w-240 w-[90dvw]`
     >
     <slot />
 </section>
