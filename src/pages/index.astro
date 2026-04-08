@@ -4,6 +4,10 @@ import Section from "../components/Section.astro";
 import Experience from "../sections/Experience.astro";
 import Aboutme from "../sections/Aboutme.astro";
 import Contact from "../sections/Contact.astro";
+
+import Button from "../components/Button.astro";
+
+
 ---
 
 <Layout
@@ -23,11 +27,7 @@ import Contact from "../sections/Contact.astro";
           únicas.
         </p>
         <div class="py-3 text-sm md:text-md w-2xs flex items-center justify-between">
-          <a
-            href="#contact"
-            class="flex gap-2 items-center justify-center px-5 py-1 rounded-3xl border border-gray-500 bg-gray-800/80 transition-all duration-150
-            hover:bg-gray-100 hover:text-gray-950"
-          >
+          <Button content="Contáctame" href="#contact">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -42,15 +42,8 @@ import Contact from "../sections/Contact.astro";
                 d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"
               ></path>
             </svg>
-            Contáctame</a
-          >
-          <a
-            href="https://github.com/angbmz364"
-            target="_blank"
-            class="flex gap-2 items-center justify-center px-5 py-1 rounded-3xl border border-gray-500 bg-gray-800/80 transition-all duration-150
-            hover:bg-gray-100 hover:text-gray-950
-            "
-          >
+          </Button>
+          <Button content="GitHub" href="https://github.com/angbmz364" target="_blank">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -65,9 +58,7 @@ import Contact from "../sections/Contact.astro";
                 d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5"
               ></path>
             </svg>
-
-            GitHub</a
-          >
+          </Button>
         </div>
       </div>
       <img
