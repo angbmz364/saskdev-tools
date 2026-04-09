@@ -3,7 +3,7 @@ import Layout from "../../layouts/ToolLayout.astro";
 ---
 
 <Layout
-    title="Menu Converter | SaskDev"
+    title="SaskDev - Menu Tools"
     description="Convierte rápida y fielmente tus configuraciones de zMenu a DeluxeMenus y viceversa manteniendo ítems, acciones y parámetros esenciales."
 >
     <main class="flex flex-col items-center">
@@ -177,14 +177,10 @@ import Layout from "../../layouts/ToolLayout.astro";
     </main>
 </Layout>
 
-<!-- JS-YAML CDN -->
-<script
-    is:inline
-    src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"
-></script>
-
 <!-- logic of menu convertor-->
-<script is:inline>
+<script>
+    import { convertDMtoZM, convertZMtoDM } from "../../libs/menuConverter.js";
+
     document.addEventListener("DOMContentLoaded", () => {
         const $ = (id) => document.getElementById(id);
         const sourceEditor = $("sourceEditor");
@@ -246,161 +242,6 @@ import Layout from "../../layouts/ToolLayout.astro";
             alertBox.classList.remove("flex");
         };
 
-        // parse commands from DeluxeMenus to zMenu syntax
-        function parseActionsToZm(commands) {
-            if (!commands) return [];
-            let actions = [];
-            let list = Array.isArray(commands) ? commands : [commands];
-            list.forEach((c) => {
-                let cmd = String(c).trim();
-                if (cmd.startsWith("[console]")) {
-                    actions.push("console: " + cmd.substring(9).trim());
-                } else if (cmd.startsWith("[player]")) {
-                    actions.push("player: " + cmd.substring(8).trim());
-                } else if (cmd.startsWith("[message]")) {
-                    actions.push("message: " + cmd.substring(9).trim());
-                } else if (cmd.startsWith("[close]")) {
-                    actions.push("close");
-                } else if (cmd.startsWith("[openguimenu]")) {
-                    actions.push("open-menu: " + cmd.substring(13).trim());
-                } else {
-                    actions.push("console: " + cmd);
-                }
-            });
-            return actions;
-        }
-
-        // parse commands from zMenu to DeluxeMenus syntax
-        function parseActionsToDm(actions) {
-            if (!actions) return [];
-            let cmds = [];
-            let list = Array.isArray(actions) ? actions : [actions];
-            list.forEach((a) => {
-                let act = String(a).trim();
-                if (act.startsWith("console:")) {
-                    cmds.push("[console] " + act.substring(8).trim());
-                } else if (act.startsWith("player:")) {
-                    cmds.push("[player] " + act.substring(7).trim());
-                } else if (act.startsWith("message:")) {
-                    cmds.push("[message] " + act.substring(8).trim());
-                } else if (act === "close") {
-                    cmds.push("[close]");
-                } else if (act.startsWith("open-menu:")) {
-                    cmds.push("[openguimenu] " + act.substring(10).trim());
-                } else {
-                    cmds.push("[console] " + act);
-                }
-            });
-            return cmds;
-        }
-
-        const convertDMtoZM = (dx) => {
-            let zm = {
-                name: dx.menu_title || "Menu Convertido",
-                size: dx.size || 54,
-                items: {},
-            };
-            // inventory type support
-            if (dx.inventory_type) zm.type = dx.inventory_type;
-
-            if (dx.items) {
-                for (const [key, item] of Object.entries(dx.items)) {
-                    let zItem = { item: {} };
-
-                    // material and base64 texture conversion for heads
-                    if (item.material) {
-                        if (item.material.startsWith("basehead-")) {
-                            zItem.item.material = "PLAYER_HEAD";
-                            zItem.item.skull = item.material.split("-")[1];
-                        } else if (item.material.startsWith("head-")) {
-                            zItem.item.material = "PLAYER_HEAD";
-                            zItem.item.skull = item.material.split("-")[1];
-                        } else {
-                            zItem.item.material = item.material;
-                        }
-                    } else {
-                        zItem.item.material = "STONE";
-                    }
-
-                    if (item.data !== undefined) zItem.item.data = item.data;
-                    if (item.amount !== undefined)
-                        zItem.item.amount = item.amount;
-
-                    // slots
-                    if (item.slot !== undefined) zItem.slot = item.slot;
-                    if (item.slots) zItem.slots = item.slots;
-
-                    // visual structure
-                    if (item.display_name) zItem.name = item.display_name;
-                    if (item.lore) zItem.lore = item.lore;
-
-                    // click events
-                    let allActions = [];
-                    if (item.left_click_commands) {
-                        allActions.push(
-                            ...parseActionsToZm(item.left_click_commands),
-                        );
-                    }
-                    if (item.right_click_commands) {
-                        allActions.push(
-                            ...parseActionsToZm(item.right_click_commands),
-                        );
-                    }
-
-                    if (allActions.length > 0) {
-                        // avoid redudant actions
-                        zItem.action = [...new Set(allActions)];
-                    }
-
-                    zm.items[key] = zItem;
-                }
-            }
-            return zm;
-        };
-
-        const convertZMtoDM = (zm) => {
-            let dx = {
-                menu_title: zm.name || "Menu Convertido",
-                open_command: "menu",
-                size: zm.size || 54,
-                items: {},
-            };
-            if (zm.type) dx.inventory_type = zm.type;
-
-            if (zm.items) {
-                for (const [key, val] of Object.entries(zm.items)) {
-                    let dItem = {};
-
-                    if (val.item) {
-                        if (val.item.skull) {
-                            dItem.material = "basehead-" + val.item.skull;
-                        } else {
-                            dItem.material = val.item.material || "STONE";
-                        }
-                        if (val.item.amount) dItem.amount = val.item.amount;
-                        if (val.item.data) dItem.data = val.item.data;
-                    } else {
-                        dItem.material = "STONE";
-                    }
-
-                    if (val.slot !== undefined) dItem.slot = val.slot;
-                    if (val.slots) dItem.slots = val.slots;
-
-                    if (val.name) dItem.display_name = val.name;
-                    if (val.lore) dItem.lore = val.lore;
-
-                    if (val.action) {
-                        let dmCommands = parseActionsToDm(val.action);
-                        dItem.left_click_commands = dmCommands;
-                        dItem.right_click_commands = dmCommands;
-                    }
-
-                    dx.items[key] = dItem;
-                }
-            }
-            return dx;
-        };
-
         convertBtn.addEventListener("click", () => {
             hideAlert();
             let sourceCode = sourceEditor.value.trim();
@@ -413,30 +254,12 @@ import Layout from "../../layouts/ToolLayout.astro";
             }
 
             try {
-                // parse code into json
-                const parsedObj = jsyaml.load(sourceCode);
-
-                if (typeof parsedObj !== "object" || parsedObj === null) {
-                    showAlert(
-                        "El YAML ingresado no es válido y no produce una estructura adecuada de configuración.",
-                    );
-                    return;
-                }
-
-                let resultObj;
+                let yamlStr;
                 if (conversionDirection.value === "dm2zm") {
-                    resultObj = convertDMtoZM(parsedObj);
+                    yamlStr = convertDMtoZM(sourceCode);
                 } else {
-                    resultObj = convertZMtoDM(parsedObj);
+                    yamlStr = convertZMtoDM(sourceCode);
                 }
-
-                // parse into yaml
-                const yamlStr = jsyaml.dump(resultObj, {
-                    indent: 2,
-                    lineWidth: -1,
-                    quotingType: '"',
-                    forceQuotes: true,
-                });
 
                 resultEditor.value = yamlStr;
                 showAlert(
@@ -446,7 +269,7 @@ import Layout from "../../layouts/ToolLayout.astro";
             } catch (e) {
                 console.error(e);
                 showAlert(
-                    `Mala sintaxis detectada. No pudimos leer el archivo YAML:\\n${e.message}`,
+                    `Mala sintaxis detectada. No pudimos leer el archivo YAML:<br>${e.message}`,
                 );
             }
         });
