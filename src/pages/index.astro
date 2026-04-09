@@ -16,8 +16,8 @@ import Button from "../components/Button.astro";
 >
   <main class="flex items-center flex-col">
     <!-- Hero -->
-    <Section extraClasses="h-[90dvh]">
-      <div>
+    <Section classes="h-[90dvh] sm:flex-row">
+      <article>
         <h1 class="text-4xl md:text-5xl w-2xs md:w-lg py-3 font-bold">Hey, soy saskdev</h1>
         <p class="w-2xs md:w-lg text-xl py-3 text-gray-200">
           +5 años programando. Estudiante de <span
@@ -26,7 +26,7 @@ import Button from "../components/Button.astro";
           > de La Merced, Perú. Especializado en el desarrollo de aplicaciones web
           únicas.
         </p>
-        <div class="py-3 text-sm md:text-md w-2xs flex items-center justify-between">
+        <section class="py-3 text-sm md:text-md w-2xs flex items-center justify-between">
           <Button content="Contáctame" href="#contact">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -59,8 +59,8 @@ import Button from "../components/Button.astro";
               ></path>
             </svg>
           </Button>
-        </div>
-      </div>
+        </section>
+      </article>
       <img
         src="/logo-white.svg"
         alt="Foto de perfil de SaskDev"
@@ -68,25 +68,23 @@ import Button from "../components/Button.astro";
       />
     </Section>
 
-    <!-- About Me -->
-    <section class="
-    flex flex-col items-center sm:items-start max-w-240 w-[90dvw]
-    my-8"
+    <!-- About Me justify-center sm:justify-between -->
+    <Section classes="
+    sm:items-start"
     id="about"
     >
       <Aboutme />
-    </section> 
+    </Section> 
     <!-- Experience  -->
-    <section class="
-    flex flex-col items-center sm:items-start max-w-240 w-[90dvw] mt-20"
-    >
+    <Section classes="mt-20">
       <Experience />
-    </section>
-    <section class="
-    flex flex-col items-center sm:items-start max-w-240 w-[90dvw] mt-20"
+    </Section>
+    
+    <!-- Contact -->
+    <Section classes="mt-20 items-center sm:items-start"
     id="contact"
     >
       <Contact />
-    </section>
+    </Section>
   </main>
 </Layout>
