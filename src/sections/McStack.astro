@@ -1,0 +1,80 @@
+---
+import Section from "../components/Section.astro";
+import ToolCard from "../components/ToolCard.astro";
+---
+<Section classes="sm:items-start" id="stack">
+  <div class="w-full max-w-240">
+    <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-6">
+      <div>
+        <span class="text-blue-500 font-mono text-sm tracking-widest uppercase">Tecnología</span>
+        <h2 class="text-3xl font-semibold text-gray-100 mt-1">Mi Stack de Minecraft</h2>
+      </div>
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-12 text-blue-500/30">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0 1 11.186 0z" />
+      </svg>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <!-- Herramientas que he construido -->
+      <div>
+        <h3 class="text-xl font-semibold text-gray-100 mb-4 flex items-center gap-2">
+          <span class="w-2 h-2 bg-blue-500 rounded-full"></span>
+          Herramientas que he construido
+        </h3>
+        <div class="space-y-4">
+          <ToolCard
+            title="Menu Tools"
+            description="Potente herramienta para convertir menús de zMenu a DeluxeMenus y viceversa. Mantiene la configuración y parámetros clave de manera fiel, ahorrando horas de trabajo."
+            url="/tools/menu"
+            tags={["zMenu", "DeluxeMenus", "Conversor"]}
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 21 3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" />
+            </svg>
+          </ToolCard>
+          <ToolCard
+            title="Event Builder"
+            description="Construye eventos complejos de manera visual. La interfaz drag & drop simplifica la creación de lógica y triggers para ConditionalEvents o Skript sin escribir código."
+            url="/tools/event-builder"
+            tags={["ConditionalEvents", "Skript", "Drag & Drop", "No-code"]}
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M14.25 6.087c0-.355.186-.676.401-.959.221-.29.349-.634.349-1.003 0-1.036-1.007-1.875-2.25-1.875s-2.25.84-2.25 1.875c0 .369.128.713.349 1.003.215.283.401.604.401.959v0a.64.64 0 0 1-.657.643 48.39 48.39 0 0 1-4.163-.3c.186 1.613.293 3.25.315 4.907a.656.656 0 0 1-.658.663v0c-.355 0-.676-.186-.959-.401a1.647 1.647 0 0 0-1.003-.349c-1.036 0-1.875 1.007-1.875 2.25s.84 2.25 1.875 2.25c.369 0 .713-.128 1.003-.349.283-.215.604-.401.959-.401v0c.31 0 .555.26.536.57a48.204 48.204 0 0 1-.255 4.008c1.55.158 3.125.261 4.72.308a.656.656 0 0 1 .663.658v0c0 .355-.186.676-.401.959a1.647 1.647 0 0 0-.349 1.003c0 1.036 1.007 1.875 2.25 1.875s2.25-.84 2.25-1.875a1.647 1.647 0 0 0-.349-1.003c-.215-.283-.401-.604-.401-.959v0c0-.316.264-.567.579-.548a48.514 48.514 0 0 0 4.148.225A48.749 48.749 0 0 0 20.316 20.9c-.21-1.637-.29-3.303-.309-4.981a.655.655 0 0 1 .658-.663v0c.355 0 .676.186.959.401.29.221.634.349 1.003.349 1.036 0 1.875-1.007 1.875-2.25s-.84-2.25-1.875-2.25c-.369 0-.713.128-1.003.349-.283.215-.604.401-.959.401v0a.656.656 0 0 1-.658-.663 48.422 48.422 0 0 0-.256-4.004c-1.52-.162-3.067-.267-4.636-.312a.655.655 0 0 1-.663-.658v0Z" />
+            </svg>
+          </ToolCard>
+          <ToolCard
+            title="Validador"
+            description="Analiza y verifica instantáneamente la sintaxis de tus configuraciones. Detecta errores o advertencias antes de subirlos al servidor, previniendo fallos en producción."
+            url="/tools/validator"
+            tags={["Sintaxis", "Debugger", "Validación"]}
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+            </svg>
+          </ToolCard>
+        </div>
+      </div>
+
+      <!-- Tecnologías que uso -->
+      <div>
+        <h3 class="text-xl font-semibold text-gray-100 mb-4 flex items-center gap-2">
+          <span class="w-2 h-2 bg-blue-500 rounded-full"></span>
+          Tecnologías y Plugins
+        </h3>
+        <div class="flex flex-wrap gap-2">
+          <span class="px-4 py-2 bg-gray-800/60 border border-gray-700 rounded-full text-sm font-mono text-gray-300">Spigot API</span>
+          <span class="px-4 py-2 bg-gray-800/60 border border-gray-700 rounded-full text-sm font-mono text-gray-300">Paper API</span>
+          <span class="px-4 py-2 bg-gray-800/60 border border-gray-700 rounded-full text-sm font-mono text-gray-300">Skript</span>
+          <span class="px-4 py-2 bg-gray-800/60 border border-gray-700 rounded-full text-sm font-mono text-gray-300">SkUtilities</span>
+          <span class="px-4 py-2 bg-gray-800/60 border border-gray-700 rounded-full text-sm font-mono text-gray-300">ConditionalEvents</span>
+          <span class="px-4 py-2 bg-gray-800/60 border border-gray-700 rounded-full text-sm font-mono text-gray-300">DeluxeMenus</span>
+          <span class="px-4 py-2 bg-gray-800/60 border border-gray-700 rounded-full text-sm font-mono text-gray-300">zMenu</span>
+          <span class="px-4 py-2 bg-gray-800/60 border border-gray-700 rounded-full text-sm font-mono text-gray-300">Vault</span>
+          <span class="px-4 py-2 bg-gray-800/60 border border-gray-700 rounded-full text-sm font-mono text-gray-300">PlaceholderAPI</span>
+          <span class="px-4 py-2 bg-gray-800/60 border border-gray-700 rounded-full text-sm font-mono text-gray-300">MySQL</span>
+          <span class="px-4 py-2 bg-gray-800/60 border border-gray-700 rounded-full text-sm font-mono text-gray-300">SQLite</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</Section>
