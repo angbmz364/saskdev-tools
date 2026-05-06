@@ -3,6 +3,7 @@ const experience = [
   {
     title: "Desarrollador Fullstack en DiofStudios",
     date: "12 Marzo, 2026 - Hasta la fecha",
+    target: "_blank",
     url: "https://diofstudios.com",
     content:
       "Encargado de el desarrollo, despliegue y mantenimiento de la página oficial de la empresa. A su vez soy parte del equipo técnico y desarrollo como desarrollador Frontend.",
@@ -10,6 +11,7 @@ const experience = [
   {
     title: "Configurador de Servidores de Minecraft",
     date: "15 Septiembre, 2025 - 2 Marzo, 2026",
+    target: "_self",
     url: "/minecraft",
     content:
       "Durante mucho tiempo me dediqué al desarrollo de servidores de Minecraft, contribuyendo en muchos servidores como desarrollador de plugins y configurador de servidores. Tambien gracias a este periodo, decidí crear un proyecto capaz de agilizar el trabajo en los servidores de minecraft.",
@@ -40,7 +42,7 @@ const experience = [
   class="flex items-center flex-col justify-center sm:justify-start w-full mt-8"
 >
   {
-    experience.map(({ title, date, content, url }) => (
+    experience.map(({ title, date, content, url, target }) => (
       <li class="max-w-xs sm:max-w-full mb-4">
         <div class="mt-3 flex flex-col items-start justify-start">
           <time
@@ -55,7 +57,7 @@ const experience = [
         <p class="text-gray-200 text-md pb-3 mt-1">{content}</p>
         <a
           href={url}
-          target="_blank"
+          target={target}
           class="
           inline-flex gap-3 items-center justify-center rounded-3xl transition-all duration-150 text-blue-500 uppercase font-semibold text-sm md:text-md
           hover:translate-x-1

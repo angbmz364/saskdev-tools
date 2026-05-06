@@ -1,0 +1,14 @@
+---
+export interface Props {
+  name: string;
+  category: 'core' | 'plugin';
+}
+
+const { name, category } = Astro.props;
+
+const isCore = category === 'core';
+---
+
+<span class={`px-4 py-1 rounded-full text-sm font-mono transition-all duration-300 hover:scale-105 hover:shadow-lg ${isCore ? 'bg-blue-500/20 border border-blue-500/30 text-blue-400 hover:bg-blue-500/30 hover:border-blue-500/50 hover:text-blue-300' : 'bg-amber-500/20 border border-amber-500/30 text-amber-400 hover:bg-amber-500/30 hover:border-amber-500/50 hover:text-amber-300'}`}>
+  {name}
+</span>

@@ -1,0 +1,51 @@
+---
+import Section from "../components/Section.astro";
+
+const servers = [
+  {
+    title: "Configurador de Servidores",
+    date: "Septiembre 2025 - Marzo 2026",
+    url: "/minecraft",
+    target: "_self",
+    content:
+      "Dedicado al desarrollo de plugins y configuración avanzada de servidores de Minecraft. Contribución en múltiples comunidades optimizando rendimiento, seguridad y experiencia de usuario. Este periodo también fue el catalizador para crear herramientas que agilizan el trabajo diario en servidores.",
+  },
+];
+---
+<Section classes="sm:items-start py-12 md:py-16" id="servers">
+  <div class="w-full max-w-240">
+    <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-6">
+      <div>
+        <h2 class="text-3xl font-semibold text-gray-100">Servidores Donde He Trabajado</h2>
+      </div>
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-12 text-blue-500/30">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M9 17.25v1.007a3 3 0 0 1-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0 1 15 18.257V17.25m6-12V15a2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 15V5.25m18 0A2.25 2.25 0 0 0 18.75 3H5.25A2.25 2.25 0 0 0 3 5.25m18 0V12a2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 12V5.25" />
+      </svg>
+    </div>
+    <ol class="flex items-center flex-col justify-center sm:justify-start w-full mt-8">
+      {
+        servers.map(({ title, date, content, url, target }) => (
+          <li class="max-w-xs sm:max-w-full mb-4 w-full">
+            <div class="mt-3 flex flex-col items-start justify-start bg-gray-800/30 border border-gray-700/50 rounded-xl p-5 hover:border-blue-500/30 transition-all duration-300">
+              <time class="text-sm uppercase font-semibold text-blue-500 mb-2">
+                {date}
+              </time>
+              <h3 class="text-2xl text-gray-100 font-semibold">{title}</h3>
+              <p class="text-gray-200 text-md pb-3 mt-1">{content}</p>
+              <a
+                href={url}
+                target={target}
+                class="inline-flex gap-3 items-center justify-center rounded-3xl transition-all duration-150 text-blue-500 uppercase font-semibold text-sm md:text-md hover:translate-x-1"
+              >
+                Ver detalles
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="size-4">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+                </svg>
+              </a>
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</Section>
