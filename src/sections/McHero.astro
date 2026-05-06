@@ -4,7 +4,7 @@ import Button from "../components/Button.astro";
 ---
 <Section classes="h-[90dvh] sm:flex-row">
   <article class="flex flex-col justify-center h-full">
-    <h1 class="text-4xl md:text-5xl lg:text-6xl w-2xs md:w-lg py-3 font-bold text-gray-100 leading-tight">
+    <h1 class="text-4xl md:text-5xl w-2xs md:w-lg py-3 font-bold  ">
       Desarrollo de Plugins<br />y Herramientas
     </h1>
     <p class="w-2xs md:w-lg text-xl py-3 text-gray-400">
@@ -24,27 +24,9 @@ import Button from "../components/Button.astro";
       </Button>
     </section>
   </article>
-  <div class="relative flex items-center justify-center size-50 lg:size-65">
-    <div class="absolute w-full h-full bg-gray-800/40 border border-gray-700 rounded-2xl transform rotate-6 translate-x-3 translate-y-3 transition-transform hover:rotate-12 hover:translate-x-4 hover:translate-y-4 duration-500"></div>
-    <div class="absolute w-4/5 h-4/5 bg-gray-700/40 border border-gray-600 rounded-xl transform -rotate-3 -translate-x-1 translate-y-1 transition-transform hover:-rotate-6 hover:-translate-x-2 hover:translate-y-2 duration-500"></div>
-    <div class="relative w-full h-full bg-gray-900 border border-blue-500/50 rounded-xl flex items-center justify-center group overflow-hidden">
-      <div class="absolute inset-0 grid grid-cols-3 grid-rows-3">
-        <div class="border border-green-500/30 bg-green-500/20"></div>
-        <div class="border border-green-500/30 bg-green-500/20"></div>
-        <div class="border border-green-500/30 bg-green-500/20"></div>
-        <div class="border border-green-500/30 bg-green-500/20"></div>
-        <div class="border border-green-500/30 bg-green-500/30"></div>
-        <div class="border border-green-500/30 bg-green-500/20"></div>
-        <div class="border border-green-500/30 bg-green-500/20"></div>
-        <div class="border border-green-500/30 bg-green-500/20"></div>
-        <div class="border border-green-500/30 bg-green-500/20"></div>
-      </div>
-      <div class="relative z-10">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-10 h-10 text-green-400/80">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 8.25h10.5m-10.5 3h10.5m-10.5 3h10.5m-10.5 3h10.5" />
-        </svg>
-      </div>
-      <div class="absolute -bottom-2 -right-2 bg-blue-500 text-gray-900 text-[10px] font-mono px-2 py-0.5 rounded border border-gray-800">v1.0</div>
-    </div>
-  </div>
+  <img 
+    src="/minecraft.svg" 
+    alt="Minecraft logo"
+    class="size-80"
+  >
 </Section>
