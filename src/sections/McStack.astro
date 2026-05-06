@@ -23,19 +23,32 @@ const plugins = [
   { name: "Dynmap", category: "plugin" },
 ];
 ---
+
 <Section classes="sm:items-start py-12 md:py-16" id="stack">
   <div class="w-full max-w-240">
-    <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-6">
-      <div>
-        <h2 class="text-3xl font-semibold text-gray-100">Mi Stack de Plugins</h2>
-      </div>
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-12 text-blue-500/30">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0 1 11.186 0z" />
+    <h2
+      class="text-3xl flex items-center justify-center sm:justify-start gap-3 w-full font-semibold mb-6"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="2"
+        stroke="currentColor"
+        class="size-8"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5"
+        ></path>
       </svg>
-    </div>
+
+      El Stack que más uso
+    </h2>
 
     <div class="flex flex-wrap gap-2">
-      {plugins.map(p => <PluginBadge name={p.name} category={p.category} />)}
+      {plugins.map((p) => <PluginBadge name={p.name} category={p.category} />)}
     </div>
   </div>
 </Section>
